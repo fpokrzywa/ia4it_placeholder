@@ -90,18 +90,31 @@ Deno.serve(async (req: Request) => {
       Submitted at: ${new Date().toLocaleString()}
     `;
 
-    // For this example, we'll use Resend (you'll need to add your API key)
-    // In production, you would uncomment this and add your Resend API key to environment variables
+    // Send email using Resend
+    const resendApiKey = Deno.env.get('RESEND_API_KEY');
     
-    /*
+    if (!resendApiKey) {
+      console.error('RESEND_API_KEY not found in environment variables');
+      return new Response(
+        JSON.stringify({ error: 'Email service not configured' }),
+        {
+          status: 500,
+          headers: {
+            ...corsHeaders,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    }
+
     const resendResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${Deno.env.get('RESEND_API_KEY')}`,
+        'Authorization': `Bearer ${resendApiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'noreply@yourdomain.com',
+        from: 'contact@ia4it.com',
         to: ['intelligentautomation4it@gmail.com'],
         subject: emailSubject,
         text: emailBody,
@@ -109,13 +122,13 @@ Deno.serve(async (req: Request) => {
     });
 
     if (!resendResponse.ok) {
-      throw new Error('Failed to send email');
+      const errorData = await resendResponse.json();
+      console.error('Resend API error:', errorData);
+      throw new Error(`Failed to send email: ${errorData.message || 'Unknown error'}`);
     }
-    */
 
-    // For demonstration, we'll just log the email content
-    console.log('Email would be sent with subject:', emailSubject);
-    console.log('Email body:', emailBody);
+    const emailResult = await resendResponse.json();
+    console.log('Email sent successfully:', emailResult);
 
     return new Response(
       JSON.stringify({ 
