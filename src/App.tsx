@@ -87,10 +87,6 @@ function App() {
         <h1 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4 tracking-tight">
           IA4IT
         </h1>
-        
-        <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-          Coming Soon - We're building something amazing for you
-        </p>
 
         {/* Contact Us Button */}
         <button
