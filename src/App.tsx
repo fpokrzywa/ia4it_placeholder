@@ -97,7 +97,6 @@ function App() {
           Contact Us
         </button>
         */}
-        </button>*/}
       </div>
 
       {/* Modal */}
