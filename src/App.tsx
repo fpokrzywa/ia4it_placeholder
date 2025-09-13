@@ -88,13 +88,14 @@ function App() {
         </h1>
 
         {/* Contact Us Button */}
+        {/*
         <button
           onClick={() => setIsModalOpen(true)}
           className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 hover:from-blue-700 hover:to-indigo-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
         >
           <Mail className="w-5 h-5" />
           Contact Us
-        </button>
+        </button>*/}
       </div>
 
       {/* Modal */}
