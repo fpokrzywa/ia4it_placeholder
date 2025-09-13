@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Mail, Send } from 'lucide-react';
+import { submitContactForm, ContactFormData } from './services/contactService';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,11 +39,7 @@ function App() {
     setIsSubmitting(true);
 
     try {
-      // In a real implementation, this would call your Supabase edge function
-      // For now, we'll simulate the submission
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      console.log('Form submitted:', formData);
+      await submitContactForm(formData as ContactFormData);
       setSubmitted(true);
       
       // Reset form after 3 seconds
@@ -58,6 +55,8 @@ function App() {
       }, 3000);
     } catch (error) {
       console.error('Submission error:', error);
+      // You could add error state handling here if needed
+      alert('There was an error sending your message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
